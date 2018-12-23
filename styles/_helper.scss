@@ -1,0 +1,206 @@
+$small: 1px;
+$medium: 768px;
+$large: 1280px;
+
+$primary-color: #4161ff;
+$secondary-color: desaturate(#41FFdF, 30%);
+$tertiary-color: desaturate(#9041FF, 30%);
+$font-family: 'parisplus-clair', sans-serif;
+
+body
+{
+    margin: 0;
+}
+
+@mixin container($type)
+{
+    display: flex;
+    flex-direction: $type;
+}
+
+.flex
+{
+    display: flex;
+}
+
+.col
+{
+    @include container(column);
+}
+
+.row
+{
+    @include container(row);
+}
+
+.col-sm-row-md
+{
+    display: flex;
+    flex-direction: column;
+    @media screen and (min-width: $medium)
+    {
+        flex-direction: row;
+    }
+}
+
+.row-sm-col-md
+{
+    display: flex;
+    flex-direction: row;
+    @media screen and (min-width: $medium)
+    {
+        flex-direction: column;
+    }
+}
+
+.wrap
+{
+    flex-wrap: wrap;
+}
+
+.center
+{
+    text-align: center;
+}
+
+.halign
+{
+    justify-content: center;
+}
+
+.valign
+{
+    align-items: center;
+}
+
+.halign-children
+{
+    &>*
+    {
+        justify-content: center;
+    }
+}
+
+.valign-children
+{
+    &>*
+    {
+        align-items: center;
+    }
+}
+
+.full-height
+{
+    height: 100vh;
+}
+
+.full-width
+{
+    width: 100vw;
+}
+
+.full-height-pct
+{
+    height: 100%;
+}
+
+.full-width-pct
+{
+    width: 100%;
+}
+
+.space-evenly
+{
+    justify-content: space-evenly;
+}
+
+.self-center
+{
+    align-self: center;
+}
+
+.padding-0
+{
+    padding: 0;
+}
+
+img.responsive
+{
+    max-width: 100%;
+    height: auto;
+    display: block;
+    @media screen and (min-width: $medium)
+    {
+        height: 600px;
+    }
+}
+
+%text
+{
+    font-family: $font-family;
+}
+
+@mixin size-exclude($size, $max: false)
+{
+    @if ($max)
+    {
+        @media screen and (min-width: $size) and (max-width: $max - 1)
+        {
+            display: none;
+        }
+    }
+    @else
+    {
+        @media screen and (min-width: $size)
+        {
+            display: none;
+        }
+    }
+}
+
+.hidden-lg
+{
+    @include size-exclude($large);
+}
+
+.hidden-md
+{
+    @include size-exclude($medium);
+}
+
+.hidden-sm
+{
+    @include size-exclude($small, $medium);
+}
+
+@for $i from 1 through 10
+{
+    .flex-#{$i}
+    {
+        flex: $i;
+    }
+}
+
+.none
+{
+    display: none;
+}
+
+.thirds
+{
+    width: 33%;
+}
+
+.inline-block
+{
+    display: inline-block;
+}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
